@@ -1,5 +1,4 @@
-
-/**
+/*
 * @license Apache-2.0
 *
 * Copyright (c) 2025 The Stdlib Authors.
@@ -17,25 +16,17 @@
 * limitations under the License.
 */
 
-'use strict';
+// TypeScript Version: 4.1
 
-// MODULES //
+/// <reference types="https://cdn.jsdelivr.net/gh/stdlib-js/types@main/index.d.ts"/>
 
-var numelDimension = require( '@stdlib/ndarray-base-numel-dimension' );
-var getStride = require( '@stdlib/ndarray-base-stride' );
-var getOffset = require( '@stdlib/ndarray-base-offset' );
-var getData = require( '@stdlib/ndarray-base-data-buffer' );
-var strided = require( '@stdlib/blas-ext-base-dlast-index-of' ).ndarray;
-var ndarraylike2scalar = require( '@stdlib/ndarray-base-ndarraylike2scalar' );
-
-
-// MAIN //
+import { float64ndarray, typedndarray } from '@stdlib/types/ndarray';
 
 /**
 * Returns the last index of a search element in a one-dimensional double-precision floating-point ndarray.
 *
-* @param {ArrayLikeObject<Object>} arrays - array-like object containing a one-dimensional input ndarray, a zero-dimensional ndarray containing the search element, and a zero-dimensional ndarray containing the index from which to begin searching
-* @returns {integer} index
+* @param arrays - array-like object containing a one-dimensional input ndarray, a zero-dimensional ndarray containing the search element, and a zero-dimensional ndarray containing the index from which to begin searching
+* @returns index
 *
 * @example
 * var Float64Array = require( '@stdlib/array-float64' );
@@ -57,40 +48,9 @@ var ndarraylike2scalar = require( '@stdlib/ndarray-base-ndarraylike2scalar' );
 * var v = dlastIndexOf( [ x, searchElement, fromIndex ] );
 * // returns 3
 */
-function dlastIndexOf( arrays ) {
-	var searchElement;
-	var fromIndex;
-	var stride;
-	var offset;
-	var idx;
-	var N;
-	var x;
-
-	x = arrays[ 0 ];
-	N = numelDimension( x, 0 );
-	searchElement = ndarraylike2scalar( arrays[ 1 ] );
-	fromIndex = ndarraylike2scalar( arrays[ 2 ] );
-
-	if ( fromIndex < 0 ) {
-		fromIndex += N;
-		if ( fromIndex < 0 ) {
-			fromIndex = 0;
-		}
-	} else if ( fromIndex >= N ) {
-		return -1;
-	}
-	N -= fromIndex;
-	stride = getStride( x, 0 );
-	offset = getOffset( x ) + ( stride*fromIndex );
-
-	idx = strided( N, searchElement, getData( x ), stride, offset );
-	if ( idx >= 0 ) {
-		idx += fromIndex;
-	}
-	return idx;
-}
+declare function dlastIndexOf( arrays: [ float64ndarray, typedndarray<number>, typedndarray<number> ] ): number;
 
 
 // EXPORTS //
 
-module.exports = dlastIndexOf;
+export = dlastIndexOf;
