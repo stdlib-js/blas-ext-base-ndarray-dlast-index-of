@@ -41,38 +41,32 @@ limitations under the License.
 
 <!-- /.intro -->
 
+<section class="installation">
 
+## Installation
+
+```bash
+npm install @stdlib/blas-ext-base-ndarray-dlast-index-of
+```
+
+Alternatively,
+
+-   To load the package in a website via a `script` tag without installation and bundlers, use the [ES Module][es-module] available on the [`esm`][esm-url] branch (see [README][esm-readme]).
+-   If you are using Deno, visit the [`deno`][deno-url] branch (see [README][deno-readme] for usage intructions).
+-   For use in Observable, or in browser/node environments, use the [Universal Module Definition (UMD)][umd] build available on the [`umd`][umd-url] branch (see [README][umd-readme]).
+
+The [branches.md][branches-url] file summarizes the available branches and displays a diagram illustrating their relationships.
+
+To view installation and usage instructions specific to each branch build, be sure to explicitly navigate to the respective README files on each branch, as linked to above.
+
+</section>
 
 <section class="usage">
 
 ## Usage
 
-To use in Observable,
-
 ```javascript
-dlastIndexOf = require( 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ext-base-ndarray-dlast-index-of@umd/browser.js' )
-```
-
-To vendor stdlib functionality and avoid installing dependency trees for Node.js, you can use the UMD server build:
-
-```javascript
-var dlastIndexOf = require( 'path/to/vendor/umd/blas-ext-base-ndarray-dlast-index-of/index.js' )
-```
-
-To include the bundle in a webpage,
-
-```html
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/blas-ext-base-ndarray-dlast-index-of@umd/browser.js"></script>
-```
-
-If no recognized module system is present, access bundle contents via the global scope:
-
-```html
-<script type="text/javascript">
-(function () {
-    window.dlastIndexOf;
-})();
-</script>
+var dlastIndexOf = require( '@stdlib/blas-ext-base-ndarray-dlast-index-of' );
 ```
 
 #### dlastIndexOf( arrays )
@@ -80,12 +74,10 @@ If no recognized module system is present, access bundle contents via the global
 Returns the last index of a specified search element in a one-dimensional double-precision floating-point ndarray.
 
 ```javascript
-var Float64Array = require( '@stdlib/array-float64' );
+var Float64Vector = require( '@stdlib/ndarray-vector-float64' );
 var scalar2ndarray = require( '@stdlib/ndarray-from-scalar' );
-var ndarray = require( '@stdlib/ndarray-base-ctor' );
 
-var xbuf = new Float64Array( [ 1.0, 2.0, 4.0, 2.0 ] );
-var x = new ndarray( 'float64', xbuf, [ 4 ], [ 1 ], 0, 'row-major' );
+var x = new Float64Vector( [ 1.0, 2.0, 4.0, 2.0 ] );
 
 var searchElement = scalar2ndarray( 2.0, {
     'dtype': 'float64'
@@ -110,12 +102,10 @@ The function has the following parameters:
 If the function is unable to find a search element, the function returns `-1`.
 
 ```javascript
-var Float64Array = require( '@stdlib/array-float64' );
+var Float64Vector = require( '@stdlib/ndarray-vector-float64' );
 var scalar2ndarray = require( '@stdlib/ndarray-from-scalar' );
-var ndarray = require( '@stdlib/ndarray-base-ctor' );
 
-var xbuf = new Float64Array( [ 1.0, 2.0, 4.0, 2.0 ] );
-var x = new ndarray( 'float64', xbuf, [ 4 ], [ 1 ], 0, 'row-major' );
+var x = new Float64Vector( [ 1.0, 2.0, 4.0, 2.0 ] );
 
 var searchElement = scalar2ndarray( 10.0, {
     'dtype': 'float64'
@@ -149,28 +139,21 @@ var idx = dlastIndexOf( [ x, searchElement, fromIndex ] );
 
 <!-- eslint no-undef: "error" -->
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-<body>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/random-array-discrete-uniform@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-base-ctor@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-from-scalar@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-to-array@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-base-ndarraylike2scalar@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/blas-ext-base-ndarray-dlast-index-of@umd/browser.js"></script>
-<script type="text/javascript">
-(function () {
+```javascript
+var discreteUniform = require( '@stdlib/random-discrete-uniform' );
+var scalar2ndarray = require( '@stdlib/ndarray-from-scalar' );
+var ndarray2array = require( '@stdlib/ndarray-to-array' );
+var ndarraylike2scalar = require( '@stdlib/ndarray-base-ndarraylike2scalar' );
+var dlastIndexOf = require( '@stdlib/blas-ext-base-ndarray-dlast-index-of' );
 
-var xbuf = discreteUniform( 10, -100, 100, {
+var opts = {
     'dtype': 'float64'
-});
-var x = new ndarray( 'float64', xbuf, [ xbuf.length ], [ 1 ], 0, 'row-major' );
+};
+
+var x = discreteUniform( [ 10 ], -100, 100, opts );
 console.log( ndarray2array( x ) );
 
-var searchElement = scalar2ndarray( 80.0, {
-    'dtype': 'float64'
-});
+var searchElement = scalar2ndarray( 80.0, opts );
 console.log( 'Search Element:', ndarraylike2scalar( searchElement ) );
 
 var fromIndex = scalar2ndarray( -1, {
@@ -180,11 +163,6 @@ console.log( 'From Index:', ndarraylike2scalar( fromIndex ) );
 
 var idx = dlastIndexOf( [ x, searchElement, fromIndex ] );
 console.log( idx );
-
-})();
-</script>
-</body>
-</html>
 ```
 
 </section>
