@@ -1,36 +1,5 @@
+"use strict";var v=function(i,e){return function(){try{return e||i((e={exports:{}}).exports,e),e.exports}catch(r){throw (e=0, r)}};};var s=v(function(g,u){
+var d=require('@stdlib/ndarray-base-numel-dimension/dist'),f=require('@stdlib/ndarray-base-stride/dist'),q=require('@stdlib/ndarray-base-offset/dist'),l=require('@stdlib/ndarray-base-data-buffer/dist'),c=require('@stdlib/blas-ext-base-dlast-index-of/dist').ndarray,n=require('@stdlib/ndarray-base-ndarraylike2scalar/dist');function m(i){var e,r,t,a;if(a=i[0],t=d(a,0),e=n(i[1]),r=n(i[2]),r<0){if(r+=t,r<0)return-1}else r>=t&&(r=t-1);return c(r+1,e,l(a),f(a,0),q(a))}u.exports=m
+});var o=s();module.exports=o;
 /** @license Apache-2.0 */
-
-'use strict';
-
-/**
-* Return the last index of a search element in a one-dimensional double-precision floating-point ndarray.
-*
-* @module @stdlib/blas-ext-base-ndarray-dlast-index-of
-*
-* @example
-* var Float64Vector = require( '@stdlib/ndarray-vector-float64' );
-* var scalar2ndarray = require( '@stdlib/ndarray-from-scalar' );
-* var dlastIndexOf = require( '@stdlib/blas-ext-base-ndarray-dlast-index-of' );
-*
-* var x = new Float64Vector( [ 1.0, 2.0, 4.0, 2.0 ] );
-*
-* var searchElement = scalar2ndarray( 2.0, {
-*     'dtype': 'float64'
-* });
-*
-* var fromIndex = scalar2ndarray( 3, {
-*     'dtype': 'generic'
-* });
-*
-* var v = dlastIndexOf( [ x, searchElement, fromIndex ] );
-* // returns 3
-*/
-
-// MODULES //
-
-var main = require( './main.js' );
-
-
-// EXPORTS //
-
-module.exports = main;
+//# sourceMappingURL=index.js.map
